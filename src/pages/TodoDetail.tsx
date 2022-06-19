@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import * as React from 'react';
+import {Todo} from './types';
 
 
-export const TodoDetail = () => {
+export const TodoDetail: React.FC<{todo: Todo}> = () => {
     const [isEdit, setIsEdit] = React.useState<boolean>(false);
     const [todoText, setTodoText] = React.useState<string>("");
 
