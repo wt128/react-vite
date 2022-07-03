@@ -1,20 +1,24 @@
-import styled from "styled-components";
+
 import { TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import * as React from 'react';
 import {Todo} from './types';
+import { TodoEdit } from './TodoEdit';
+import { Edit } from "@mui/icons-material";
 
 
-export const TodoDetail: React.FC<{todo: Todo}> = () => {
+export const TodoDetail: React.FC<{todo: Todo}> = (prop) => {
     const [isEdit, setIsEdit] = React.useState<boolean>(false);
     const [todoText, setTodoText] = React.useState<string>("");
-
+    const [open, setOpen] = React.useState<boolean>(false);
     const boxStyle: React.CSSProperties = {
         padding: '0.5em 1em',
         background: '#f4f4f4',
         borderLeft: 'solid 6px #5bb7ae',
-        display: "flex",
+        
         width: "50%",
+        height: "100px",
+        
         margin: "20px auto",
         boxShadow: '0px 2px 3px rgba(0, 0, 0, 0.33)',
         animation: "fadeIn 5s ease 1s 1 normal backwards",
@@ -22,40 +26,34 @@ export const TodoDetail: React.FC<{todo: Todo}> = () => {
     const InnerText: React.CSSProperties = {
         margin: 0,
         padding: 0,
-        textAlign: "center"
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        setTodoText(e.target.value);
-    };
-
-    const saveEdit: React.VoidFunctionComponent = () => {
         
+        textAlign: "left",
+    };
+
+    const InnerUserName: React.CSSProperties = {
+        fontSize: "18px",
+        fontWeight: "bold",
+        textAlign: "left",
+        fontFamily: ""
     }
 
-    const EditText: React.FunctionComponent = (todoText) => {
-        if (isEdit) {
-            return <TextField
-                label="編集"
-                defaultValue=""
-                onChange={handleChange}
-            >
-            </TextField>
-        }
-        return <></>
+    const openDialog = (edited: Todo) => {
+        setOpen(true);
     }
 
+   
     return (
         <>
-            <style>
-                .
-            </style>
             <div style={{...boxStyle}}>
-                <p style={{...InnerText}}>{ todoText }</p>
-                <EditIcon className="EditIcon" onClick={() => setIsEdit(!isEdit)} />
-                <EditText />
+                <p style={{...InnerUserName}}>
+                    {prop.todo.user}       
+                </p>
+                <p style={{...InnerText}}>{prop.todo.body}</p>
+                <EditIcon className="item2" onClick={() => openDialog(prop.todo)} />
             </div>
+            <TodoEdit
+                isOpen={open}
+            />
         </>
     )
 }

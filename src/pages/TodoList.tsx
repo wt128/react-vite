@@ -8,7 +8,7 @@ import axios from "axios";
 
 //const todos = React.createContext()
 export const Card: React.FC = () => {
-    const [todos, setTodos] = React.useState<Todo[]>([]);
+    //const [todos, setTodos] = React.useState<Todo[]>([]);
     const fetchTodo = async () => {
 
         // await axios.get<Todo>();
@@ -17,24 +17,23 @@ export const Card: React.FC = () => {
      const fetchCount = async () => {
         // await axios.get<Todo>();
      }
-    const listsTodo = todos.forEach((t) =>{ 
-        return <TodoDetail todo={t} />
-    })
+     const todos: Todo[] = [
+         {
+             id: 1,
+             user: "aaaaa",
+             body: "body",
+             icon: "&#127995;",
+             tag: 1,
+
+         }
+     ];
+  
     return (
         <>
-        <style>
-                {`@keyframes fadeIn {
-                from {
-                    opacity: 0,
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1,
-                    transform: translateY(0);
-                }
-            }`}
-        </style>
-            {{listsTodo}}
+            {todos.map((t) =>{ 
+                return <TodoDetail todo={t} key={t.id} />
+            })
+            }
         </>
     )
 }
